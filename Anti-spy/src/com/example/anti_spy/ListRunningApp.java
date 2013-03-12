@@ -34,7 +34,6 @@ public class ListRunningApp extends Activity {
 		final   ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 		final List<RunningTaskInfo> recentTasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
 
-//		salam khobi pesar
 		
 		String foregroundTaskPackageName = (recentTasks.get(0).topActivity.getPackageName());
 		PackageManager pm = getPackageManager();
@@ -66,7 +65,7 @@ public class ListRunningApp extends Activity {
 		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1,value);
 		listView.setAdapter(arrayAdapter);
 		    
-		    
+//=====================
 		
 		
 		    
