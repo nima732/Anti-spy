@@ -1,7 +1,10 @@
 package com.example.anti_spy;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.Pack200.Packer;
+
+import com.example.anti_spy.entity.PackageContainer;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -48,40 +51,16 @@ public class ListRunningApp extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		
-		
-		// ===========================
-		
-		
-		List<PackageInfo> packageInfos = getPackageManager().getInstalledPackages(PackageManager.GET_PERMISSIONS);
-		for(PackageInfo value : packageInfos ){
-//			Get information from ManiFest.xml
-			 ActivityInfo[] activityInfo = null;
-			try {
-				activityInfo = getPackageManager().getPackageInfo(value.packageName, PackageManager.GET_ACTIVITIES).activities;
-			} catch (NameNotFoundException e) {
-				e.printStackTrace();
-			}
-		        Log.i("Pranay", value.packageName + " has total " + ((activityInfo==null)?0:activityInfo.length) + " activities");
-		        if(activityInfo!=null)
-		        {
-		            for(int i=0; i<activityInfo.length; i++)
-		            {
-//		            	if (value.requestedPermissions != null && ((value.requestedPermissions).toString()).contains("camera")){
-		                Log.i("PC", value.packageName + " ::: " + activityInfo[i].name);
-		                Log.d(" Check permission ", value.requestedPermissions + " ::: " + activityInfo[i].name);
-//		            	}
-		            }
-		        }
-		}
-		
-		
-		
-		// ===========================
 
 		String foregroundTaskAppName = foregroundAppPackageInfo.applicationInfo
 				.loadLabel(pm).toString();
 
+		
+		List <PackageContainer> packageContainers = new ArrayList<PackageContainer>();
+//		String[][]  runningTaskName = new String[recentTasks.size()][]; 
+		
 		for (int i = 0; i < recentTasks.size(); i++) {
 			Log.d("Executed app",
 					"Application executed : "
@@ -91,7 +70,77 @@ public class ListRunningApp extends Activity {
 			// Add all the task with ID into the list.
 			stringBuffer.append(recentTasks.get(i).baseActivity.toShortString()
 					+ "\t\t ID: " + recentTasks.get(i).id + " \n\n\n ");
+			
+			
+			
+			String[] temp =  (recentTasks.get(i).baseActivity.getPackageName()).split("\\.");
+//			runningTaskName[i][i] = temp[temp.length-1][recentTasks.get(i).id];
+			PackageContainer packageContainer = new PackageContainer(temp[temp.length-1],0);
+			packageContainers.add(packageContainer);
 		}
+		
+		
+		for (RunningAppProcessInfo processInfo :activityManager.getRunningAppProcesses()){
+			String[] temp = (processInfo.processName).split("\\.");
+			for (PackageContainer container : packageContainers){
+			if ( container.getPackageName().equalsIgnoreCase(temp[temp.length-1])){
+				container.setIdNumber(processInfo.pid);
+				}
+			}
+			System.out.println("@@@@@@@@@@ " + processInfo.pid);
+			System.out.println(processInfo.processName);
+		}
+
+		
+		
+		// ===========================
+		
+		
+//		to get all the packages. It is important to specify GET_PERMISSIONS flag to access to permission, otherwise it is null.
+		List<PackageInfo> packageInfos = getPackageManager().getInstalledPackages(PackageManager.GET_PERMISSIONS|PackageManager.GET_PERMISSIONS);
+		for (PackageInfo value : packageInfos) {
+			// Get information from ManiFest.xml
+			ActivityInfo[] activityInfo = null;
+			try {
+				activityInfo = getPackageManager().getPackageInfo(
+						value.packageName, PackageManager.GET_ACTIVITIES).activities;
+			} catch (NameNotFoundException e) {
+				e.printStackTrace();
+			}
+			Log.i("Pranay", value.packageName + " has total "
+					+ ((activityInfo == null) ? 0 : activityInfo.length)
+					+ " activities");
+			if (activityInfo != null) {
+				
+//				for(int j = 0;j < runningTaskName.length; j++){
+				for(PackageContainer container : packageContainers){
+					
+//					if (value.packageName != null && ((value.packageName).toString()).contains(runningTaskName[j])) {
+					if (value.packageName != null && ((value.packageName).toString()).contains(container.getPackageName())) {
+						
+						
+//	TODO check how to define permission in development procedure for avoiding iteration for all the activities 
+				for (int i = 0; i < activityInfo.length; i++) {
+						Log.i(">>>>>>>>> Activity Name >>>>>>>>>>>>>> ", value.packageName + " ::: "
+								+ activityInfo[i].name);
+						if (value.requestedPermissions != null) {
+							for (String myPermission : value.requestedPermissions) {
+								String temp[] = myPermission.split("\\.");
+								myPermission = temp[temp.length-1];
+								if (myPermission.equals("CAMERA") || myPermission.equals("RECORD_AUDIO")){
+								Log.d(" Check permission ",myPermission + " ::: " + activityInfo[i].name);
+								android.os.Process.killProcess(container.getIdNumber());
+								}
+							}
+						}
+					}
+				}
+				}
+			}
+		}
+
+		// ===========================
+
 
 		TextView textView = new TextView(this);
 		textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
@@ -102,7 +151,6 @@ public class ListRunningApp extends Activity {
 		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1, android.R.id.text1, value);
 		listView.setAdapter(arrayAdapter);
-
 
 		// Show the Up button in the action bar.
 		setupActionBar();
