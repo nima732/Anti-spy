@@ -1,6 +1,7 @@
 package com.example.anti_spy;
 
 import java.util.List;
+import java.util.jar.Pack200.Packer;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -28,51 +30,84 @@ public class ListRunningApp extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_running_app);
-		
-		StringBuffer stringBuffer = new StringBuffer("");
-		
-		final   ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-		final List<RunningTaskInfo> recentTasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
 
-		
-		String foregroundTaskPackageName = (recentTasks.get(0).topActivity.getPackageName());
+		StringBuffer stringBuffer = new StringBuffer("");
+
+		final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+		final List<RunningTaskInfo> recentTasks = activityManager
+				.getRunningTasks(Integer.MAX_VALUE);
+
+		String foregroundTaskPackageName = (recentTasks.get(0).topActivity
+				.getPackageName());
 		PackageManager pm = getPackageManager();
 		PackageInfo foregroundAppPackageInfo = null;
 		try {
-			foregroundAppPackageInfo = pm.getPackageInfo(foregroundTaskPackageName, 0);
+			foregroundAppPackageInfo = pm.getPackageInfo(
+					foregroundTaskPackageName, 0);
 		} catch (NameNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String foregroundTaskAppName = foregroundAppPackageInfo.applicationInfo.loadLabel(pm).toString();
-				
 		
-	    for (int i = 0; i < recentTasks.size(); i++) 
-	    {
-	        Log.d("Executed app", "Application executed : " +recentTasks.get(i).baseActivity.toShortString()+ "\t\t ID: "+recentTasks.get(i).id+"");
-	        
-	        // Add all the task with ID into the list.
-	        stringBuffer.append(recentTasks.get(i).baseActivity.toShortString()+ "\t\t ID: "+recentTasks.get(i).id+" \n\n\n ");
-	    }
-	    
-		    
-	    TextView textView = new TextView(this);
-	    textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,18);
-	    textView.setText(stringBuffer.toString());
 		
-		String[] value = {stringBuffer.toString()};
+		// ===========================
+		
+		
+		List<PackageInfo> packageInfos = getPackageManager().getInstalledPackages(PackageManager.GET_PERMISSIONS);
+		for(PackageInfo value : packageInfos ){
+//			Get information from ManiFest.xml
+			 ActivityInfo[] activityInfo = null;
+			try {
+				activityInfo = getPackageManager().getPackageInfo(value.packageName, PackageManager.GET_ACTIVITIES).activities;
+			} catch (NameNotFoundException e) {
+				e.printStackTrace();
+			}
+		        Log.i("Pranay", value.packageName + " has total " + ((activityInfo==null)?0:activityInfo.length) + " activities");
+		        if(activityInfo!=null)
+		        {
+		            for(int i=0; i<activityInfo.length; i++)
+		            {
+//		            	if (value.requestedPermissions != null && ((value.requestedPermissions).toString()).contains("camera")){
+		                Log.i("PC", value.packageName + " ::: " + activityInfo[i].name);
+		                Log.d(" Check permission ", value.requestedPermissions + " ::: " + activityInfo[i].name);
+//		            	}
+		            }
+		        }
+		}
+		
+		
+		
+		// ===========================
+
+		String foregroundTaskAppName = foregroundAppPackageInfo.applicationInfo
+				.loadLabel(pm).toString();
+
+		for (int i = 0; i < recentTasks.size(); i++) {
+			Log.d("Executed app",
+					"Application executed : "
+							+ recentTasks.get(i).baseActivity.toShortString()
+							+ "\t\t ID: " + recentTasks.get(i).id + "");
+
+			// Add all the task with ID into the list.
+			stringBuffer.append(recentTasks.get(i).baseActivity.toShortString()
+					+ "\t\t ID: " + recentTasks.get(i).id + " \n\n\n ");
+		}
+
+		TextView textView = new TextView(this);
+		textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+		textView.setText(stringBuffer.toString());
+
+		String[] value = { stringBuffer.toString() };
 		ListView listView = (ListView) findViewById(R.id.mylist);
-		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1,value);
+		ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, android.R.id.text1, value);
 		listView.setAdapter(arrayAdapter);
-		    
-//=====================
-		
-		
-		    
+
+
 		// Show the Up button in the action bar.
 		setupActionBar();
-		
-//		setContentView(textView);
+
+		// setContentView(textView);
 	}
 
 	/**
