@@ -1,5 +1,10 @@
 package com.example.anti_spy;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.jar.Pack200.Packer;
@@ -91,6 +96,51 @@ public class ListRunningApp extends Activity {
 			System.out.println(processInfo.processName);
 		}
 
+//		==========================
+		try {
+            String line;
+            Process process = Runtime.getRuntime().exec("su");
+            OutputStream stdin = process.getOutputStream();
+            InputStream stderr = process.getErrorStream();
+            InputStream stdout = process.getInputStream();
+
+            stdin.write(("ls\n").getBytes());
+             stdin.write("exit\n".getBytes());
+            stdin.flush();
+
+            stdin.close();
+            BufferedReader br = new BufferedReader(new InputStreamReader(stdout));
+            while ((line = br.readLine()) != null) {
+                Log.d("[Output]", line);
+            }
+            br.close();
+            br =
+                    new BufferedReader(new InputStreamReader(stderr));
+            while ((line = br.readLine()) != null) {
+            	Log.e("[Error]", line);
+            }
+            br.close();
+
+			process.waitFor();
+			process.destroy();
+
+        } catch (Exception ex) {
+        	ex.printStackTrace();
+        }
+/*		Process myprocess = null;
+		 try {
+			myprocess = Runtime.getRuntime().exec("su");
+			OutputStream outputStream = myprocess.getOutputStream();
+			outputStream.write(("ls\n").getBytes());
+			outputStream.flush();
+			outputStream.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+*/
+//		==========================
 		
 		
 		// ===========================
@@ -129,6 +179,7 @@ public class ListRunningApp extends Activity {
 								myPermission = temp[temp.length-1];
 								if (myPermission.equals("CAMERA") || myPermission.equals("RECORD_AUDIO")){
 								Log.d(" Check permission ",myPermission + " ::: " + activityInfo[i].name);
+								
 								android.os.Process.killProcess(container.getIdNumber());
 								}
 							}
