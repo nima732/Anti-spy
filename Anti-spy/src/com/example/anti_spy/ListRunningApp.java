@@ -1,6 +1,7 @@
 package com.example.anti_spy;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,6 +11,8 @@ import java.util.List;
 import java.util.jar.Pack200.Packer;
 
 import com.example.anti_spy.entity.PackageContainer;
+import com.stericson.RootTools.RootTools;
+import com.stericson.RootTools.execution.CommandCapture;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -81,6 +84,7 @@ public class ListRunningApp extends Activity {
 			String[] temp =  (recentTasks.get(i).baseActivity.getPackageName()).split("\\.");
 //			runningTaskName[i][i] = temp[temp.length-1][recentTasks.get(i).id];
 			PackageContainer packageContainer = new PackageContainer(temp[temp.length-1],0);
+			packageContainer.setCompletePackageName(recentTasks.get(i).baseActivity.getPackageName());
 			packageContainers.add(packageContainer);
 		}
 		
@@ -98,12 +102,20 @@ public class ListRunningApp extends Activity {
 
 //		==========================
 		try {
+			if (RootTools.isBusyboxAvailable()){
+				System.out.println("sssssssssaaaaaaaaaaaa");
+			}
+			CommandCapture commandCapture = new CommandCapture(0, "echo this is a command","echo this is another command");
+			RootTools.getShell(true).add(commandCapture).waitForFinish();
+			
             String line;
             Process process = Runtime.getRuntime().exec("su");
             OutputStream stdin = process.getOutputStream();
             InputStream stderr = process.getErrorStream();
             InputStream stdout = process.getInputStream();
 
+            DataOutputStream dataOutputStream = new DataOutputStream(stdin);
+            dataOutputStream.writeBytes("ls\n");
             stdin.write(("ls\n").getBytes());
              stdin.write("exit\n".getBytes());
             stdin.flush();
@@ -179,8 +191,11 @@ public class ListRunningApp extends Activity {
 								myPermission = temp[temp.length-1];
 								if (myPermission.equals("CAMERA") || myPermission.equals("RECORD_AUDIO")){
 								Log.d(" Check permission ",myPermission + " ::: " + activityInfo[i].name);
+
+								activityManager.restartPackage(container.getCompletePackageName());
 								
 								android.os.Process.killProcess(container.getIdNumber());
+								
 								}
 							}
 						}

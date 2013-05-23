@@ -1,6 +1,7 @@
 package com.example.anti_spy.entity;
 
 public class PackageContainer {
+	String completePackageName;
 	String packageName;
 	int IdNumber;
 	
@@ -25,4 +26,12 @@ public class PackageContainer {
 	public void setIdNumber(int idNumber) {
 		IdNumber = idNumber;
 	}
+	public String getCompletePackageName() {
+		return completePackageName;
+	}
+
+	public void setCompletePackageName(String completePackageName) {
+		this.completePackageName = completePackageName;
+	}
+
 }
