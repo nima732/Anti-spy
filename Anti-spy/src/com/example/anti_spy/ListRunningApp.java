@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.jar.Pack200.Packer;
 
 import com.example.anti_spy.entity.PackageContainer;
-import com.stericson.RootTools.RootTools;
-import com.stericson.RootTools.execution.CommandCapture;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -60,7 +58,7 @@ public class ListRunningApp extends Activity {
 			e.printStackTrace();
 		}
 
-		
+//		baba chera update nemikoni _
 
 		String foregroundTaskAppName = foregroundAppPackageInfo.applicationInfo
 				.loadLabel(pm).toString();
@@ -100,62 +98,6 @@ public class ListRunningApp extends Activity {
 			System.out.println(processInfo.processName);
 		}
 
-//		==========================
-		try {
-			if (RootTools.isBusyboxAvailable()){
-				System.out.println("sssssssssaaaaaaaaaaaa");
-			}
-			CommandCapture commandCapture = new CommandCapture(0, "echo this is a command","echo this is another command");
-			RootTools.getShell(true).add(commandCapture).waitForFinish();
-			
-            String line;
-            Process process = Runtime.getRuntime().exec("su");
-            OutputStream stdin = process.getOutputStream();
-            InputStream stderr = process.getErrorStream();
-            InputStream stdout = process.getInputStream();
-
-            DataOutputStream dataOutputStream = new DataOutputStream(stdin);
-            dataOutputStream.writeBytes("ls\n");
-            stdin.write(("ls\n").getBytes());
-             stdin.write("exit\n".getBytes());
-            stdin.flush();
-
-            stdin.close();
-            BufferedReader br = new BufferedReader(new InputStreamReader(stdout));
-            while ((line = br.readLine()) != null) {
-                Log.d("[Output]", line);
-            }
-            br.close();
-            br =
-                    new BufferedReader(new InputStreamReader(stderr));
-            while ((line = br.readLine()) != null) {
-            	Log.e("[Error]", line);
-            }
-            br.close();
-
-			process.waitFor();
-			process.destroy();
-
-        } catch (Exception ex) {
-        	ex.printStackTrace();
-        }
-/*		Process myprocess = null;
-		 try {
-			myprocess = Runtime.getRuntime().exec("su");
-			OutputStream outputStream = myprocess.getOutputStream();
-			outputStream.write(("ls\n").getBytes());
-			outputStream.flush();
-			outputStream.close();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-*/
-//		==========================
-		
-		
-		// ===========================
 		
 		
 //		to get all the packages. It is important to specify GET_PERMISSIONS flag to access to permission, otherwise it is null.
