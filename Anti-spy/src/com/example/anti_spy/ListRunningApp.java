@@ -58,7 +58,6 @@ public class ListRunningApp extends Activity {
 			e.printStackTrace();
 		}
 
-// 	@@@@@@@@@@@@@@@@@@
 		String foregroundTaskAppName = foregroundAppPackageInfo.applicationInfo
 				.loadLabel(pm).toString();
 
