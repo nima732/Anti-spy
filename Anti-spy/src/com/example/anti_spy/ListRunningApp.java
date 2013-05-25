@@ -58,7 +58,6 @@ public class ListRunningApp extends Activity {
 			e.printStackTrace();
 		}
 
-//		baba chera update nemikoni _
 
 		String foregroundTaskAppName = foregroundAppPackageInfo.applicationInfo
 				.loadLabel(pm).toString();
