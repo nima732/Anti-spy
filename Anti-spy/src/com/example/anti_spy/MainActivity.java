@@ -16,6 +16,7 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		startService(new Intent(this,ScreenOn.class));
 	}
 
 	@Override
@@ -24,6 +25,7 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
 	
 	/**
 	 * Called when the user clicks the user Send button
