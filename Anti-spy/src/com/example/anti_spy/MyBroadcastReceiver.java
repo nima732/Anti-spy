@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.Contacts.People;
 import android.util.Log;
+import android.widget.Toast;
 
 
 public class MyBroadcastReceiver extends BroadcastReceiver {
@@ -18,6 +19,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 
 		System.out.println("ghoooooooooooooooz<<<<<<<<<<<<<<<<<<");
+		Toast.makeText(context, "ACTION_PACKAGE_REMOVED nima nima joonnnnnnn2222", Toast.LENGTH_LONG).show();
         mNotificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 		Notification notifyDetails = new Notification(R.drawable.android,"Time Reset!",System.currentTimeMillis());
 		PendingIntent myIntent = PendingIntent.getActivity(context, 0, new Intent(Intent.ACTION_VIEW, People.CONTENT_URI), 0);

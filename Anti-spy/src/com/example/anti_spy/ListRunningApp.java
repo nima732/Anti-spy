@@ -104,6 +104,7 @@ public class ListRunningApp extends Activity {
 			// Get information from ManiFest.xml
 			ActivityInfo[] activityInfo = null;
 			try {
+//				Retrieve overall information about packages that are installed on the device.
 				activityInfo = getPackageManager().getPackageInfo(
 						value.packageName, PackageManager.GET_ACTIVITIES).activities;
 			} catch (NameNotFoundException e) {
