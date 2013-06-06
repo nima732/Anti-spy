@@ -4,3 +4,5 @@
 *.apk
 *.project
 *.settings
+*.dex
+*.ap_

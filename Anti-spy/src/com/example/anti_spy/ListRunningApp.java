@@ -105,6 +105,7 @@ public class ListRunningApp extends Activity {
 			ActivityInfo[] activityInfo = null;
 			try {
 //				Retrieve overall information about packages that are installed on the device.
+//				Array of all <activity> tags included under <application>, or null if there were none. This is only filled in if the flag GET_ACTIVITIES was set.
 				activityInfo = getPackageManager().getPackageInfo(
 						value.packageName, PackageManager.GET_ACTIVITIES).activities;
 			} catch (NameNotFoundException e) {
