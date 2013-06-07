@@ -29,6 +29,9 @@ import android.widget.TextView;
 
 public class ListRunningApp extends Activity {
 
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,64 +39,26 @@ public class ListRunningApp extends Activity {
 
 		StringBuffer stringBuffer = new StringBuffer("");
 
+//		Use with getSystemService(String) to retrieve a ActivityManager for interacting with the global system state.
 		final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-		final List<RunningTaskInfo> recentTasks = activityManager
-				.getRunningTasks(Integer.MAX_VALUE);
-
-		String foregroundTaskPackageName = (recentTasks.get(0).topActivity
-				.getPackageName());
-		PackageManager pm = getPackageManager();
-		PackageInfo foregroundAppPackageInfo = null;
-		try {
-			foregroundAppPackageInfo = pm.getPackageInfo(
-					foregroundTaskPackageName, 0);
-		} catch (NameNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		String foregroundTaskAppName = foregroundAppPackageInfo.applicationInfo
-				.loadLabel(pm).toString();
-
 		
-		List <PackageContainer> packageContainers = new ArrayList<PackageContainer>();
-//		String[][]  runningTaskName = new String[recentTasks.size()][]; 
+//		Return a list of the tasks that are currently running, with the most recent being first and older ones after in order.
+		final List<RunningTaskInfo> runningTasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
 		
-		for (int i = 0; i < recentTasks.size(); i++) {
+		
+		for (int i = 0; i < runningTasks.size(); i++) {
 			Log.d("Executed app",
 					"Application executed : "
-							+ recentTasks.get(i).baseActivity.toShortString()
-							+ "\t\t ID: " + recentTasks.get(i).id + "");
+							+ runningTasks.get(i).baseActivity.toShortString()
+							+ "\t\t ID: " + runningTasks.get(i).id + "");
 
 			// Add all the task with ID into the list.
-			stringBuffer.append(recentTasks.get(i).baseActivity.toShortString()
-					+ "\t\t ID: " + recentTasks.get(i).id + " \n\n\n ");
-			
-			
-			
-			String[] temp =  (recentTasks.get(i).baseActivity.getPackageName()).split("\\.");
-//			runningTaskName[i][i] = temp[temp.length-1][recentTasks.get(i).id];
-			PackageContainer packageContainer = new PackageContainer(temp[temp.length-1],0);
-			packageContainer.setCompletePackageName(recentTasks.get(i).baseActivity.getPackageName());
-			packageContainers.add(packageContainer);
+			stringBuffer.append(runningTasks.get(i).baseActivity.toShortString()
+					+ "\t\t ID: " + runningTasks.get(i).id + " \n\n\n ");
 		}
-		
-		
-		for (RunningAppProcessInfo processInfo :activityManager.getRunningAppProcesses()){
-			String[] temp = (processInfo.processName).split("\\.");
-			for (PackageContainer container : packageContainers){
-			if ( container.getPackageName().equalsIgnoreCase(temp[temp.length-1])){
-				container.setIdNumber(processInfo.pid);
-				}
-			}
-			System.out.println("@@@@@@@@@@ " + processInfo.pid);
-			System.out.println(processInfo.processName);
-		}
-
-		
 		
 //		to get all the packages. It is important to specify GET_PERMISSIONS flag to access to permission, otherwise it is null.
-		List<PackageInfo> packageInfos = getPackageManager().getInstalledPackages(PackageManager.GET_PERMISSIONS|PackageManager.GET_PERMISSIONS);
+		List<PackageInfo> packageInfos = getPackageManager().getInstalledPackages(PackageManager.GET_PERMISSIONS);
 		for (PackageInfo value : packageInfos) {
 			// Get information from ManiFest.xml
 			ActivityInfo[] activityInfo = null;
@@ -110,12 +75,6 @@ public class ListRunningApp extends Activity {
 					+ " activities");
 			if (activityInfo != null) {
 				
-//				for(int j = 0;j < runningTaskName.length; j++){
-				for(PackageContainer container : packageContainers){
-					
-//					if (value.packageName != null && ((value.packageName).toString()).contains(runningTaskName[j])) {
-					if (value.packageName != null && ((value.packageName).toString()).contains(container.getPackageName())) {
-						
 						
 //	TODO check how to define permission in development procedure for avoiding iteration for all the activities 
 				for (int i = 0; i < activityInfo.length; i++) {
@@ -128,16 +87,14 @@ public class ListRunningApp extends Activity {
 								if (myPermission.equals("CAMERA") || myPermission.equals("RECORD_AUDIO")){
 								Log.d(" Check permission ",myPermission + " ::: " + activityInfo[i].name);
 
-								activityManager.restartPackage(container.getCompletePackageName());
-								
-								android.os.Process.killProcess(container.getIdNumber());
-								
+					
+								activityManager.restartPackage(value.packageName);
+																
 								}
 							}
 						}
 					}
-				}
-				}
+				
 			}
 		}
 
