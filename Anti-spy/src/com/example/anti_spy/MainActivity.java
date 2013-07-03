@@ -1,5 +1,6 @@
 package com.example.anti_spy;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListActivity;
@@ -31,7 +32,7 @@ public class MainActivity extends Activity {
 	 * Called when the user clicks the user Send button
 	 */
 	public void sendMessage(View view){
-
+		
 		Intent listIntent = new Intent(this,ListRunningApp.class);
 //		EditText editText = (EditText) findViewById(R.id.edit_message);
 //		String message = editText.getText().toString();

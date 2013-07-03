@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -35,6 +36,15 @@ import android.os.Build;
 
 public class ListRunningApp extends Activity {
 
+//	======= for uninstalling, launch the task manager of Android ==========
+//    Intent i = new Intent();
+//    i.setClassName("com.android.settings", "com.android.settings.InstalledAppDetails");
+//    i.setAction(Intent.ACTION_VIEW);
+//    i.putExtra("pkg", "com.example.anti_spy");
+//    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//	startActivity(i);
+//	=====================================
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
