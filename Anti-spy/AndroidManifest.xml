@@ -6,6 +6,8 @@
 	<uses-permission android:name="android.permission.GET_TASKS"/>
 	<uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+	<uses-permission android:name="android.permission.INSTALL_PACKAGES"/>
+	<uses-permission android:name="android.permission.BROADCAST_PACKAGE_REMOVED"/>
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
@@ -48,7 +50,21 @@
                 <action android:name="android.intent.action.SCREEN_OFF" />
             </intent-filter>
         </receiver>
-        <receiver android:name="MyStartServiceReceiver" >
+        <receiver android:name="MyBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <action android:name="android.intent.action.PACKAGE_CHANGED"/>
+                <action android:name="android.intent.action.PACKAGE_DATA_CLEARED"/>
+                <action android:name="android.intent.action.PACKAGE_FIRST_LAUNCH"/>
+                <action android:name="android.intent.action.PACKAGE_FULLY_REMOVED"/>
+                <action android:name="android.intent.action.PACKAGE_INSTALL"/>
+                <action android:name="android.intent.action.PACKAGE_NEEDS_VERIFICATION"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <action android:name="android.intent.action.PACKAGE_REPLACED"/>
+                <action android:name="android.intent.action.PACKAGE_RESTARTED"/>
+                <action android:name="android.intent.action.PACKAGE_VERIFIED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+            </intent-filter>
         </receiver>
     </application>
 
