@@ -3,11 +3,13 @@
     package="com.example.anti_spy"
     android:versionCode="1"
     android:versionName="1.0" >
-	<uses-permission android:name="android.permission.GET_TASKS"/>
-	<uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
-	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-	<uses-permission android:name="android.permission.INSTALL_PACKAGES"/>
-	<uses-permission android:name="android.permission.BROADCAST_PACKAGE_REMOVED"/>
+
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.BROADCAST_PACKAGE_REMOVED" />
+
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
@@ -37,35 +39,43 @@
         <activity
             android:name="com.example.anti_spy.ListRunningApp"
             android:label="@string/title_activity_list_running_app"
-            android:parentActivityName="com.example.anti_spy.MainActivity">
+            android:parentActivityName="com.example.anti_spy.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.anti_spy.MainActivity" />
         </activity>
-        
-        <service android:enabled="true" android:name="ScreenOn" />
-         <receiver android:name="MyScheduleReceiver" >
+
+        <service
+            android:name="com.example.anti_spy.ScreenOn"
+            android:enabled="true" />
+
+        <receiver android:name="com.example.anti_spy.MyScheduleReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.SCREEN_ON" />
                 <action android:name="android.intent.action.SCREEN_OFF" />
             </intent-filter>
         </receiver>
-        <receiver android:name="MyBroadcastReceiver" >
+        <receiver android:name="com.example.anti_spy.MyBroadcastReceiver" >
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED"/>
-                <action android:name="android.intent.action.PACKAGE_CHANGED"/>
-                <action android:name="android.intent.action.PACKAGE_DATA_CLEARED"/>
-                <action android:name="android.intent.action.PACKAGE_FIRST_LAUNCH"/>
-                <action android:name="android.intent.action.PACKAGE_FULLY_REMOVED"/>
-                <action android:name="android.intent.action.PACKAGE_INSTALL"/>
-                <action android:name="android.intent.action.PACKAGE_NEEDS_VERIFICATION"/>
-                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
-                <action android:name="android.intent.action.PACKAGE_REPLACED"/>
-                <action android:name="android.intent.action.PACKAGE_RESTARTED"/>
-                <action android:name="android.intent.action.PACKAGE_VERIFIED"/>
-                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_CHANGED" />
+                <action android:name="android.intent.action.PACKAGE_DATA_CLEARED" />
+                <action android:name="android.intent.action.PACKAGE_FIRST_LAUNCH" />
+                <action android:name="android.intent.action.PACKAGE_FULLY_REMOVED" />
+                <action android:name="android.intent.action.PACKAGE_INSTALL" />
+                <action android:name="android.intent.action.PACKAGE_NEEDS_VERIFICATION" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.PACKAGE_RESTARTED" />
+                <action android:name="android.intent.action.PACKAGE_VERIFIED" />
+                <action android:name="android.intent.action.TIME_SET" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="com.example.anti_spy.ListResources"
+            android:label="@string/title_activity_list_resources" >
+        </activity>
     </application>
 
 </manifest>

@@ -10,10 +10,17 @@
 	    android:layout_weight="1"
 	    android:hint="@string/edit_message"
 	    />
- -->	<Button 
+ -->
+ 	<Button 
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:text="@string/button_send"
 	    android:onClick="sendMessage"
+	    />
+ 	<Button 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="@string/button_list_resource"
+	    android:onClick="listResources"
 	    />
 </LinearLayout>

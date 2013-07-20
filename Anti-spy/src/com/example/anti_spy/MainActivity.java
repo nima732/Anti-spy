@@ -26,6 +26,10 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
+	public void listResources(View view){
+		Intent listResouce = new Intent(this, ListResources.class);
+		startActivity(listResouce);
+	}
 	
 	/**
 	 * Called when the user clicks the user Send button
