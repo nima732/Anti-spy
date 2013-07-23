@@ -3,6 +3,9 @@ package dataBase;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.anti_spy.entity.Resource;
+
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -47,6 +50,10 @@ public class ResourceDAO {
 	    database.delete(MySqlHelper.TABLE_NAME, MySqlHelper.COLUMN_ID + " = " + id, null);
 	  }
 
+	  public Cursor myGetAllComments(){
+		  return database.query(MySqlHelper.TABLE_NAME, allColumns, null, null, null, null, null);
+	  }
+	  
 	  public List<Resource> getAllComments() {
 	    List<Resource> resources = new ArrayList<Resource>();
 

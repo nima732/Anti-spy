@@ -1,4 +1,4 @@
-package dataBase;
+package com.example.anti_spy.entity;
 
 public class Resource {
 	private long id;

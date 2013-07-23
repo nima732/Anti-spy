@@ -13,8 +13,8 @@ public class MySqlHelper extends SQLiteOpenHelper {
 	public static final String RESOURCE_NAME = "name";
 	public static final String RESOURCE_SELECTED = "isSelected"; // resource is selected 0 , Not selected 0
 
-	private static final String DATABASE_NAME = "resourceHandler.db";
-	private static final int DATABASE_VERSION = 1;
+	public static final String DATABASE_NAME = "resourceHandler.db";
+	public static final int DATABASE_VERSION = 1;
 
 	// Database creation sql statement
 	private static final String DATABASE_CREATE = "create table "
@@ -29,6 +29,7 @@ public class MySqlHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		System.out.println("££££££££££££££££££££££££££££££££££££££££££££");
 		db.execSQL(DATABASE_CREATE);
 
 	}
