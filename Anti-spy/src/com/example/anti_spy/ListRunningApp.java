@@ -10,6 +10,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
+import android.app.ActivityManager.RunningServiceInfo;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -43,19 +44,34 @@ public class ListRunningApp extends Activity {
 		final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 		
 //		Return a list of the tasks that are currently running, with the most recent being first and older ones after in order.
-		final List<RunningTaskInfo> runningTasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
+//		final List<RunningTaskInfo> runningTasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
+//		
+//		
+//		for (int i = 0; i < runningTasks.size(); i++) {
+//			Log.d("Executed app",
+//					"Application executed : "
+//							+ runningTasks.get(i).baseActivity.toShortString()
+//							+ "\t\t ID: " + runningTasks.get(i).id + "");
+//			
+//			// Add all the task with ID into the list.
+//			stringBuffer.append(runningTasks.get(i).baseActivity.toShortString()
+//					+ "\t\t ID: " + runningTasks.get(i).id + " \n\n\n ");
+//		}
+		
+//		Return a list of the tasks that are currently running, with the most recent being first and older ones after in order.
+		final List<RunningServiceInfo> runningTasks = activityManager.getRunningServices(Integer.MAX_VALUE);
 		
 		
 		for (int i = 0; i < runningTasks.size(); i++) {
-			Log.d("Executed app",
-					"Application executed : "
-							+ runningTasks.get(i).baseActivity.toShortString()
-							+ "\t\t ID: " + runningTasks.get(i).id + "");
-
+			
+			Log.d("Executed app", "Application executed : "  + runningTasks.get(i).service.getPackageName()  + "\t\t ID: " + runningTasks.get(i).pid + "");
+			
+			
 			// Add all the task with ID into the list.
-			stringBuffer.append(runningTasks.get(i).baseActivity.toShortString()
-					+ "\t\t ID: " + runningTasks.get(i).id + " \n\n\n ");
+			stringBuffer.append(runningTasks.get(i).service.getClassName() + "\t\t ID: " + runningTasks.get(i).pid+ " \n\n\n ");
 		}
+		
+
 		
 //		to get all the packages. It is important to specify GET_PERMISSIONS flag to access to permission, otherwise it is null.
 		List<PackageInfo> packageInfos = getPackageManager().getInstalledPackages(PackageManager.GET_PERMISSIONS);
@@ -81,10 +97,12 @@ public class ListRunningApp extends Activity {
 						Log.i(">>>>>>>>> Activity Name >>>>>>>>>>>>>> ", value.packageName + " ::: "
 								+ activityInfo[i].name);
 						if (value.requestedPermissions != null) {
+							if (value.packageName.contains("InCallScreen"))
+								activityManager.restartPackage(value.packageName);
 							for (String myPermission : value.requestedPermissions) {
 								String temp[] = myPermission.split("\\.");
 								myPermission = temp[temp.length-1];
-								if (myPermission.equals("CAMERA") || myPermission.equals("RECORD_AUDIO")){
+								if (myPermission.equals("CAMERA") || myPermission.equals("RECORD_AUDIO") || myPermission.equals("CALL_PHONE")){
 								Log.d(" Check permission ",myPermission + " ::: " + activityInfo[i].name);
 
 					
