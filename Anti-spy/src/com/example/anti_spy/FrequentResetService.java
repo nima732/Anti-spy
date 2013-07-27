@@ -27,7 +27,7 @@ public class FrequentResetService extends Service {
 			@Override
 			public void run() {
 
-				for(String value:myIntent.getStringExtra("nima").split(",")){
+				for(String value:myIntent.getStringExtra("strPackageReset").split(",")){
 //					System.out.println("#############"+ value);
 					activityManager.restartPackage(value);
 				}

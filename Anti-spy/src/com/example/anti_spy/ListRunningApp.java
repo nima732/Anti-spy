@@ -152,7 +152,7 @@ public class ListRunningApp extends Activity {
 		// ===========================
 
 		Intent intent = new Intent(this, FrequentResetService.class);
-		intent.putExtra("nima", applist.toString());
+		intent.putExtra("strPackageReset", applist.toString());
 		startService(intent);
 
 		// =====================================
