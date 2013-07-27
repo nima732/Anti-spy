@@ -6,3 +6,4 @@
 *.settings
 *.dex
 *.ap_
+*/bin/*

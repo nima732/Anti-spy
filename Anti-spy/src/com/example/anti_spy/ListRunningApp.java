@@ -12,7 +12,9 @@ import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -29,7 +31,9 @@ import android.widget.TextView;
 
 public class ListRunningApp extends Activity {
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onCreate(android.os.Bundle)
 	 */
 	@Override
@@ -37,15 +41,19 @@ public class ListRunningApp extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_running_app);
 
+		StringBuffer applist = new StringBuffer();
+
 		StringBuffer stringBuffer = new StringBuffer("");
 
-//		Use with getSystemService(String) to retrieve a ActivityManager for interacting with the global system state.
+		// Use with getSystemService(String) to retrieve a ActivityManager for
+		// interacting with the global system state.
 		final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-		
-//		Return a list of the tasks that are currently running, with the most recent being first and older ones after in order.
-		final List<RunningTaskInfo> runningTasks = activityManager.getRunningTasks(Integer.MAX_VALUE);
-		
-		
+
+		// Return a list of the tasks that are currently running, with the most
+		// recent being first and older ones after in order.
+		final List<RunningTaskInfo> runningTasks = activityManager
+				.getRunningTasks(Integer.MAX_VALUE);
+
 		for (int i = 0; i < runningTasks.size(); i++) {
 			Log.d("Executed app",
 					"Application executed : "
@@ -53,53 +61,101 @@ public class ListRunningApp extends Activity {
 							+ "\t\t ID: " + runningTasks.get(i).id + "");
 
 			// Add all the task with ID into the list.
-			stringBuffer.append(runningTasks.get(i).baseActivity.toShortString()
-					+ "\t\t ID: " + runningTasks.get(i).id + " \n\n\n ");
+			stringBuffer.append(runningTasks.get(i).baseActivity
+					.toShortString()
+					+ "\t\t ID: "
+					+ runningTasks.get(i).id
+					+ " \n\n\n ");
 		}
-		
-//		to get all the packages. It is important to specify GET_PERMISSIONS flag to access to permission, otherwise it is null.
-		List<PackageInfo> packageInfos = getPackageManager().getInstalledPackages(PackageManager.GET_PERMISSIONS);
-		for (PackageInfo value : packageInfos) {
-			// Get information from ManiFest.xml
-			ActivityInfo[] activityInfo = null;
-			try {
-//				Retrieve overall information about packages that are installed on the device.
-//				Array of all <activity> tags included under <application>, or null if there were none. This is only filled in if the flag GET_ACTIVITIES was set.
-				activityInfo = getPackageManager().getPackageInfo(
-						value.packageName, PackageManager.GET_ACTIVITIES).activities;
-			} catch (NameNotFoundException e) {
-				e.printStackTrace();
-			}
-			Log.i("Pranay", value.packageName + " has total "
-					+ ((activityInfo == null) ? 0 : activityInfo.length)
-					+ " activities");
-			if (activityInfo != null) {
-				
-						
-//	TODO check how to define permission in development procedure for avoiding iteration for all the activities 
-				for (int i = 0; i < activityInfo.length; i++) {
-						Log.i(">>>>>>>>> Activity Name >>>>>>>>>>>>>> ", value.packageName + " ::: "
-								+ activityInfo[i].name);
-						if (value.requestedPermissions != null) {
-							for (String myPermission : value.requestedPermissions) {
-								String temp[] = myPermission.split("\\.");
-								myPermission = temp[temp.length-1];
-								if (myPermission.equals("CAMERA") || myPermission.equals("RECORD_AUDIO")){
-								Log.d(" Check permission ",myPermission + " ::: " + activityInfo[i].name);
 
-					
-								activityManager.restartPackage(value.packageName);
-																
+		// to get all the packages. It is important to specify GET_PERMISSIONS
+		// flag to access to permission, otherwise it is null.
+		List<PackageInfo> packageInfos = getPackageManager()
+				.getInstalledPackages(PackageManager.GET_PERMISSIONS);
+		for (PackageInfo value : packageInfos) {
+
+			try {
+				ApplicationInfo applicationInfo = getPackageManager()
+						.getPackageInfo(value.packageName,
+								PackageManager.GET_ACTIVITIES).applicationInfo;
+				System.out.println(">>>>>>>>>><<<<<<<<< "
+						+ applicationInfo.publicSourceDir);
+
+				if ((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {
+					System.out.println(">>>>>>packages is system package"
+							+ value.packageName);
+				} else {
+
+					// Get information from ManiFest.xml
+					ActivityInfo[] activityInfo = null;
+					try {
+						// Retrieve overall information about packages that are
+						// installed on the device.
+						// Array of all <activity> tags included under
+						// <application>, or null if there were none. This is
+						// only filled in if the flag GET_ACTIVITIES was set.
+						activityInfo = getPackageManager().getPackageInfo(
+								value.packageName,
+								PackageManager.GET_ACTIVITIES).activities;
+					} catch (NameNotFoundException e) {
+						e.printStackTrace();
+					}
+					Log.i("Pranay",
+							value.packageName
+									+ " has total "
+									+ ((activityInfo == null) ? 0
+											: activityInfo.length)
+									+ " activities");
+
+					if (activityInfo != null) {
+
+						// TODO check how to define permission in development
+						// procedure for avoiding iteration for all the
+						// activities
+						for (int i = 0; i < activityInfo.length; i++) {
+							Log.i(">>>>>>>>> Activity Name >>>>>>>>>>>>>> ",
+									value.packageName + " ::: "
+											+ activityInfo[i].name);
+							if (value.requestedPermissions != null) {
+								for (String myPermission : value.requestedPermissions) {
+									String temp[] = myPermission.split("\\.");
+									myPermission = temp[temp.length - 1];
+									if (myPermission.equals("CAMERA")
+											|| myPermission
+													.equals("RECORD_AUDIO")
+											|| myPermission
+													.equals("CALL_PHONE")) {
+										Log.d(" Check permission ",
+												myPermission + " ::: "
+														+ activityInfo[i].name);
+										if (applist.indexOf(value.packageName) < 0)
+											applist.append(value.packageName
+													+ ",");
+
+//										activityManager.restartPackage(value.packageName);
+
+									}
 								}
 							}
 						}
+
 					}
-				
+				}
+
+			} catch (NameNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
+
 		}
 
 		// ===========================
 
+		Intent intent = new Intent(this, FrequentResetService.class);
+		intent.putExtra("nima", applist.toString());
+		startService(intent);
+
+		// =====================================
 
 		TextView textView = new TextView(this);
 		textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);

@@ -49,6 +49,10 @@
             android:name="com.example.anti_spy.ScreenOn"
             android:enabled="true" />
 
+        <service android:name="com.example.anti_spy.FrequentResetService"
+            	android:enabled="true"
+            	android:process=""></service>
+        
         <receiver android:name="com.example.anti_spy.MyScheduleReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.SCREEN_ON" />
