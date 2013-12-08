@@ -35,6 +35,11 @@ public class MainActivity extends Activity {
 
 	}
 	
+	public void layoutTutorial(View view){
+		Intent displayLayoutTutorial = new Intent(this,LayoutTutorial.class);
+		startActivity(displayLayoutTutorial);
+	}
+	
 	/**
 	 * Called when the user clicks the user Send button
 	 */

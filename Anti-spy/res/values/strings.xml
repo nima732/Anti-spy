@@ -13,5 +13,7 @@
     <string name="title_activity_list_running_app">ListRunningApp</string>
     <string name="title_activity_list_resources">ListResources</string>
     <string name="title_activity_display_resource_test">DisplayResourceTest</string>
+    <string name="title_activity_layout_tutorial">LayoutTutorial</string>
+    <string name="butten_layout_tutorial">Hello Butten</string>
 
 </resources>

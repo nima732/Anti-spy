@@ -85,6 +85,10 @@
             android:name="com.example.anti_spy.DisplayResourceTest"
             android:label="@string/title_activity_display_resource_test" >
         </activity>
+        <activity
+            android:name="com.example.anti_spy.LayoutTutorial"
+            android:label="@string/title_activity_layout_tutorial" >
+        </activity>
     </application>
 
 </manifest>

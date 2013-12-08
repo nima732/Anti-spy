@@ -1,26 +1,46 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-	android:orientation="horizontal">
-<!-- 	<EditText 
+    android:orientation="horizontal" >
+
+    <!--
+     	<EditText 
 	    android:id="@+id/edit_message"
 	    android:layout_width="0dp"
-	    android:layout_height="wrap_content"
+	    android:layout_height="wrap_content"strive
 	    android:layout_weight="1"
 	    android:hint="@string/edit_message"
 	    />
- -->
- 	<Button 
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@string/button_send"
-	    android:onClick="sendMessage"
-	    />
- 	<Button 
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="@string/button_list_resource"
-	    android:onClick="listResources"
-	    />
-</LinearLayout>
+    -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"	
+        >
+
+        <Button
+            android:id="@+id/Button1"
+            android:layout_width="100dp"
+            android:layout_height="fill_parent"
+            android:onClick="sendMessage"
+            android:text="@string/button_send" />
+
+        <Button
+            android:id="@+id/Button2"
+            android:layout_width="100dp"
+            android:layout_height="fill_parent"
+            android:onClick="listResources"
+            android:text="@string/button_list_resource" />
+
+        <Button
+            android:id="@+id/Button3"
+            android:layout_width="100dp"
+            android:layout_height="fill_parent"
+            android:onClick="layoutTutorial"
+            android:text="@string/butten_layout_tutorial" />
+
+    </LinearLayout>
+
+</RelativeLayout>
