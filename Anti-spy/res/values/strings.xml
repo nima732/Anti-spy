@@ -4,6 +4,7 @@
     <string name="app_name">Anti-spy</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="New">Ghoor ghoor !</string>
     <string name="hello">Salam !</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">List all running application</string>
@@ -11,5 +12,6 @@
     <string name="title_activity_display_message">My Message</string>
     <string name="title_activity_list_running_app">ListRunningApp</string>
     <string name="title_activity_list_resources">ListResources</string>
+    <string name="title_activity_display_resource_test">DisplayResourceTest</string>
 
 </resources>

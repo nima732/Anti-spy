@@ -153,6 +153,7 @@ public class ListRunningApp extends Activity {
 
 		Intent intent = new Intent(this, FrequentResetService.class);
 		intent.putExtra("strPackageReset", applist.toString());
+		intent.putExtra("durationExcu", "60");
 		startService(intent);
 
 		// =====================================

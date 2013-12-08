@@ -27,8 +27,12 @@ public class MainActivity extends Activity {
 	}
 	
 	public void listResources(View view){
-		Intent listResouce = new Intent(this, ListResources.class);
-		startActivity(listResouce);
+//		Intent listResouce = new Intent(this, ListResources.class);
+//		startActivity(listResouce);
+		
+		Intent displayResourceTest = new Intent(this, DisplayResourceTest.class);
+		startActivity(displayResourceTest);
+
 	}
 	
 	/**

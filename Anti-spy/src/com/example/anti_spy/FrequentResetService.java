@@ -18,10 +18,15 @@ public class FrequentResetService extends Service {
 		long delay = 1000;
 		long period = 5000;
 
+		
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
+			
+//			get durration of executaion from avtivity and from user
+			int durationExcu = Integer.parseInt(myIntent.getStringExtra("durationExcu") == null ? "1": myIntent.getStringExtra("durationExcu"));
+			
 			int counter = 1;
-			int uperLimit = 12 * 2; // The period is 5000 ms is equal to 5 s. 1
+			int uperLimit = 12 * durationExcu; // The period is 5000 ms is equal to 5 s. 1
 									// minuts is equal to 12 time execution.
 
 			@Override
@@ -40,7 +45,7 @@ public class FrequentResetService extends Service {
 			}
 		}, delay, period);
 
-		return super.onStartCommand(intent, flags, startId);
+		return START_STICKY;
 	}
 
 	@Override
