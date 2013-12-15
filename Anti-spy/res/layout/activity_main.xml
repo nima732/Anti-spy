@@ -35,6 +35,8 @@
             android:text="@string/button_list_resource" />
 
         <Button
+            android:background="@drawable/blue_menu_btn"
+            style="@style/ButtonText"
             android:id="@+id/Button3"
             android:layout_width="100dp"
             android:layout_height="fill_parent"
