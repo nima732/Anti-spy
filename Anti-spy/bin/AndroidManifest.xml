@@ -89,6 +89,11 @@
             android:name="com.example.anti_spy.LayoutTutorial"
             android:label="@string/title_activity_layout_tutorial" >
         </activity>
+        <activity
+            android:name="draw.DrawTouch"
+            android:label="@string/title_activity_draw_touch" >
+        </activity>
+        
     </application>
 
 </manifest>
