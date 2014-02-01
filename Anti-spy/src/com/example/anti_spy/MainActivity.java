@@ -1,5 +1,7 @@
 package com.example.anti_spy;
 
+//import draw.DrawCircle;
+import draw.DrawTouch;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ListActivity;
@@ -11,6 +13,8 @@ import android.widget.EditText;
 public class MainActivity extends Activity {
 	public final static String EXTRA_MESSAGE="come.example.anti_spy.MESSAGE";
 	
+//	DrawCircle drawCircle;
+	DrawTouch drawTouch;
 	
 		@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +39,10 @@ public class MainActivity extends Activity {
 
 	}
 	
-	public void layoutTutorial(View view){
-		Intent displayLayoutTutorial = new Intent(this,LayoutTutorial.class);
-		startActivity(displayLayoutTutorial);
-	}
+//	public void layoutTutorial(View view){
+//		Intent displayLayoutTutorial = new Intent(this,LayoutTutorial.class);
+//		startActivity(displayLayoutTutorial);
+//	}
 	
 	/**
 	 * Called when the user clicks the user Send button
@@ -56,6 +60,16 @@ public class MainActivity extends Activity {
 //		String message = editText.getText().toString();
 //		intent.putExtra(EXTRA_MESSAGE, message);
 //		startActivity(intent);
+	}
+	
+	public void drawClass(View view){
+// ======================================		
+//		drawCircle = new DrawCircle(this);
+//		setContentView(drawCircle);
+// ======================================		
+		drawTouch = new DrawTouch();
+		Intent drawLineIntent = new Intent(this,DrawTouch.class);
+		startActivity(drawLineIntent);
 	}
 
 }
