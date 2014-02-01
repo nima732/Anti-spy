@@ -25,6 +25,7 @@ public class SingleTouchEventView extends View {
 
 	  @Override
 	  protected void onDraw(Canvas canvas) {
+		  System.out.println(">>>>>>>>><");
 	    canvas.drawPath(path, paint);
 	  }
 
