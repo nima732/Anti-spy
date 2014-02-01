@@ -21,27 +21,34 @@
         >
 
         <Button
+            android:background="@drawable/btn_purple"
+            style="@style/ButtonText"
             android:id="@+id/Button1"
             android:layout_width="100dp"
-            android:layout_height="fill_parent"
+            android:layout_height="50dp"
             android:onClick="sendMessage"
-            android:text="@string/button_send" />
+            android:text="@string/button_send" 
+            />
 
         <Button
+            android:background="@drawable/blue_menu_btn"
             android:id="@+id/Button2"
+            style="@style/ButtonText"
             android:layout_width="100dp"
-            android:layout_height="fill_parent"
+            android:layout_height="50dp"
             android:onClick="listResources"
-            android:text="@string/button_list_resource" />
+            android:text="@string/button_list_resource" 
+            />
 
         <Button
             android:background="@drawable/blue_menu_btn"
             style="@style/ButtonText"
             android:id="@+id/Button3"
             android:layout_width="100dp"
-            android:layout_height="fill_parent"
+            android:layout_height="50dp"
             android:onClick="layoutTutorial"
-            android:text="@string/butten_layout_tutorial" />
+            android:text="@string/butten_layout_tutorial" 
+            />
 
     </LinearLayout>
 
