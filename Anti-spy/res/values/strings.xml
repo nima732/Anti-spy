@@ -15,5 +15,6 @@
     <string name="title_activity_display_resource_test">DisplayResourceTest</string>
     <string name="title_activity_layout_tutorial">LayoutTutorial</string>
     <string name="butten_layout_tutorial">Hello Butten</string>
+    <string name="title_activity_draw_touch2">DrawTouch2</string>
 
 </resources>
