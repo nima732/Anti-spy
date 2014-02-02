@@ -11,11 +11,24 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class DrawTouch extends Activity {
+	   DrawCircle drawView;
+
+	    @Override
+	    public void onCreate(Bundle savedInstanceState) {
+	        super.onCreate(savedInstanceState);
+	        // Set full screen view
+	        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, 
+	                                         WindowManager.LayoutParams.FLAG_FULLSCREEN);
+	        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+	        drawView = new DrawCircle(this);
+	        setContentView(drawView);
+	        drawView.requestFocus();
+	    }
 	
-	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-	    super.onCreate(savedInstanceState);
-	    setContentView(new SingleTouchEventView(this, null));
-	  }
-	}
+//	@Override
+//	  public void onCreate(Bundle savedInstanceState) {
+//	    super.onCreate(savedInstanceState);
+//	    setContentView(new SingleTouchEventView(this, null));
+//	  }
+}

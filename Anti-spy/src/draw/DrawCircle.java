@@ -14,7 +14,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.nfc.Tag;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,8 +35,8 @@ public class DrawCircle extends View implements OnTouchListener {
 	Point point;
 	
     Paint paint = new Paint();
+    List<Point> points = new ArrayList<Point>();
 */
-	  List<Point> points = new ArrayList<Point>();
     public DrawCircle(Context context) {
         super(context);
         setFocusable(true);
@@ -57,18 +56,16 @@ public class DrawCircle extends View implements OnTouchListener {
     @Override
     public void onDraw(Canvas canvas) {
 // ==========================
-    	        for (Point point : points) {
-            canvas.drawCircle(point.x, point.y, 5, paint);
-            System.out.println(">>>>++++>>>>><"+point.x);
-            System.out.println(">>>>>+++>>>><"+point.y);
-//            Log.d(Tag, "Painting: "+point);
-        }
-    	        System.out.println(">>>>>>>>><");
+    	//        for (Point point : points) {
+//            canvas.drawCircle(point.x, point.y, 5, paint);
+//            // Log.d(TAG, "Painting: "+point);
+//        }
     	
-    	        canvas.drawPath(path, paint);
     	// ==========================
         
 
+		  System.out.println(">>>>>>>>><");
+		    canvas.drawPath(path, paint);
 
        
 /*
@@ -149,7 +146,6 @@ public class DrawCircle extends View implements OnTouchListener {
 	    float eventX = event.getX();
 	    float eventY = event.getY();
 
-	    
 		
 	    switch (event.getAction()) {
 	    case MotionEvent.ACTION_DOWN:
@@ -167,7 +163,6 @@ public class DrawCircle extends View implements OnTouchListener {
 	      return false;
 	    }
 	    invalidate();
-
 	    
 /*		// if(event.getAction() != MotionEvent.ACTION_DOWN)
         // return super.onTouchEvent(event);
