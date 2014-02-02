@@ -7,10 +7,28 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".DrawTouch" >
+    
+<draw.DrawCircle 
+    android:id ="@+id/draw"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+</draw.DrawCircle>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+   <Button 
+       android:id ="@+id/buttonTouch"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="save"
+       android:layout_alignParentRight="true"
+       android:layout_alignParentBottom="true"       
+       ></Button>
 
+   <Button 
+       android:id ="@+id/buttonTouch2"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="save on SD"
+       android:layout_alignParentLeft="true"
+       android:layout_alignParentBottom="true"
+       ></Button>
 </RelativeLayout>
