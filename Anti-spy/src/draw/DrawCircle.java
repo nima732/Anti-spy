@@ -14,6 +14,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.nfc.Tag;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,7 +22,11 @@ import android.view.View.OnTouchListener;
 
 public class DrawCircle extends View implements OnTouchListener {
 	
-	private static final String TAG = "DrawView";
+	  private Paint paint = new Paint();
+	  private Path path = new Path();
+
+	
+/*	private static final String TAG = "DrawView";
 	private float mDownX;
 	private float mDownY;
 	private final float SCROLL_THRESHOLD = 10;
@@ -30,9 +35,9 @@ public class DrawCircle extends View implements OnTouchListener {
 	boolean actionUp = false;
 	Point point;
 	
-    List<Point> points = new ArrayList<Point>();
     Paint paint = new Paint();
-
+*/
+	  List<Point> points = new ArrayList<Point>();
     public DrawCircle(Context context) {
         super(context);
         setFocusable(true);
@@ -52,17 +57,24 @@ public class DrawCircle extends View implements OnTouchListener {
     @Override
     public void onDraw(Canvas canvas) {
 // ==========================
-    	//        for (Point point : points) {
-//            canvas.drawCircle(point.x, point.y, 5, paint);
-//            // Log.d(TAG, "Painting: "+point);
-//        }
+    	        for (Point point : points) {
+            canvas.drawCircle(point.x, point.y, 5, paint);
+            System.out.println(">>>>++++>>>>><"+point.x);
+            System.out.println(">>>>>+++>>>><"+point.y);
+//            Log.d(Tag, "Painting: "+point);
+        }
+    	        System.out.println(">>>>>>>>><");
     	
+    	        canvas.drawPath(path, paint);
     	// ==========================
-       Path path = new Path();
-       System.out.println(">>>>>>>>>>>>");
         
 
-       for(Point point : points){
+
+       
+/*
+		    Path path = new Path();
+		    System.out.println(">>>>>>>>>>>>");
+ *        for(Point point : points){
         	
             if(first){
                 first = false;
@@ -86,7 +98,7 @@ public class DrawCircle extends View implements OnTouchListener {
             actionUp = false;
 
         }
-     // ==========================        
+*/     // ==========================        
         
 //        Path path = new Path();
 //
@@ -133,7 +145,31 @@ public class DrawCircle extends View implements OnTouchListener {
     
     
 	public boolean onTouch(View view, MotionEvent event) {
-        // if(event.getAction() != MotionEvent.ACTION_DOWN)
+        
+	    float eventX = event.getX();
+	    float eventY = event.getY();
+
+	    
+		
+	    switch (event.getAction()) {
+	    case MotionEvent.ACTION_DOWN:
+	    	System.out.println("*******jskjhg****");
+	      path.moveTo(eventX, eventY);
+	      return true;
+	    case MotionEvent.ACTION_MOVE:
+	    	System.out.println("*******jskjhg***222*");
+	      path.lineTo(eventX, eventY);
+	      break;
+	    case MotionEvent.ACTION_UP:
+	      // nothing to do
+	      break;
+	    default:
+	      return false;
+	    }
+	    invalidate();
+
+	    
+/*		// if(event.getAction() != MotionEvent.ACTION_DOWN)
         // return super.onTouchEvent(event);
         point = new Point();
         point.x = (int) event.getX();
@@ -169,13 +205,14 @@ public class DrawCircle extends View implements OnTouchListener {
                 Log.i(TAG, "movement detected");
                 isOnClick = false;
             }
-
+        
             
             break;
         default:
             break;
     }
-        return true;
+*/        
+	    return true;
     }
     
     class Point {
