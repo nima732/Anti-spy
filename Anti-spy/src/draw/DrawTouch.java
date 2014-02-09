@@ -15,15 +15,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class DrawTouch extends Activity {
@@ -58,12 +61,15 @@ public class DrawTouch extends Activity {
 		System.out.println("@@@@@@@@@@@@3");
 		Button button1 = (Button) findViewById(R.id.buttonTouch);
 		Button button2 = (Button) findViewById(R.id.buttonTouch2);
+		Button button3 = (Button) findViewById(R.id.buttonLoad);
 		System.out.println("@@@@@@@@@@@@4");
 		button1.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 
+				String filePath = getFilesDir().getPath().toString();
 				File folder = new File(Environment
 						.getExternalStorageDirectory().toString());
+				folder = new File(filePath);
 				boolean success = false;
 				if (!folder.exists()) {
 					success = folder.mkdirs();
@@ -71,8 +77,10 @@ public class DrawTouch extends Activity {
 
 				System.out.println(success + "folder");
 
-				File file = new File(Environment.getExternalStorageDirectory()
-						.toString() + "/sample.png");
+//				File file = new File(Environment.getExternalStorageDirectory()
+//						.toString() + "/sample.png");
+
+				File file = new File(folder, "/sample.png");
 
 				if (!file.exists()) {
 					try {
@@ -258,6 +266,57 @@ public class DrawTouch extends Activity {
 			}
 
 		});
+		
+		button3.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+/*				File imgFile = new File("/data/data/com.example.anti_spy/files/sample.png");
+				if(imgFile.exists()){
+
+				    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+				    ImageView myImage = (ImageView) findViewById(R.id.imageView1);
+				    myImage.setImageBitmap(myBitmap);
+
+				}
+*/				
+				
+				
+				
+				drawView.handleLoadImage();
+				
+				
+//				DrawCircle drawCircle = new DrawCircle(Context context, AttributeSet attSet);
+//				drawCircle.handleLoadImage();
+
+//				Bitmap mBitmap ;
+//				Canvas mCanvas;
+//				Paint paint = new Paint();
+//
+//				mBitmap = Bitmap.createBitmap(320, 480, Bitmap.Config.ARGB_8888);
+//				mCanvas = new Canvas(mBitmap);
+//				
+//				Bitmap mBitmapSave = null;
+//				
+//				File imgFile = new File("/data/data/com.example.anti_spy/files/sample.png");
+//
+//			      try {
+//					  mBitmapSave = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+//
+//			    	  
+////			    	  mBitmapSave.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(imgFile));
+//			      } catch (Exception e) {
+//			           e.printStackTrace();
+//			      }
+//			      
+//			      mCanvas.drawBitmap(mBitmapSave, 0, 0, null);
+
+			      
+			}
+		});
+		
 
 	}
 

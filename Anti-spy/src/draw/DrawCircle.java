@@ -1,7 +1,12 @@
 package draw;
 
+import java.io.File;
+import java.io.FileOutputStream;
+
+import android.R;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -12,12 +17,13 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.ImageView;
 
 public class DrawCircle extends View implements OnTouchListener {
 
 	private Paint paint = new Paint();
 	private Path path = new Path();
-	private Bitmap mBitmap;
+	private Bitmap mBitmap ;
 	private Canvas mCanvas;
 
 	// List<Point> points = new ArrayList<Point>();
@@ -47,8 +53,40 @@ public class DrawCircle extends View implements OnTouchListener {
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
+		
+		/*
+		Bitmap mBitmap;
+*/		
+/*		File imgFile = new File("/data/data/com.example.anti_spy/files/sample.png");
+		if(imgFile.exists()){
+
+		    mBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+//		    ImageView myImage = (ImageView) findViewById(com.example.anti_spy.R.id.imageView1);
+//		    myImage.setImageBitmap(mBitmap);
+
+		}else{
+		
+		}
+*/
 		mBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
 		mCanvas = new Canvas(mBitmap);
+		
+/*		Bitmap mBitmapSave = null;
+		
+		File imgFile = new File("/data/data/com.example.anti_spy/files/sample.png");
+
+	      try {
+			  mBitmapSave = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+	    	  
+//	    	  mBitmapSave.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(imgFile));
+	      } catch (Exception e) {
+	           e.printStackTrace();
+	      }
+	      
+	      mCanvas.drawBitmap(mBitmapSave, 0, 0, null);
+*/
 	}
 
 	@Override
@@ -65,6 +103,12 @@ public class DrawCircle extends View implements OnTouchListener {
 		System.out.println(">>>>>>>>><");
 		canvas.drawPath(path, paint);
 
+		
+		canvas.save();
+	    canvas.translate(50, 50);
+	    canvas.scale(0.5f, 0.5f);
+	    canvas.drawRect(0.0f, 0.0f, 5.0f, 5.0f, paint);
+	    canvas.restore();
 	}
 
 	public boolean onTouch(View view, MotionEvent event) {
@@ -90,6 +134,29 @@ public class DrawCircle extends View implements OnTouchListener {
 		return true;
 	}
 
+	public void handleLoadImage(){
+
+		mBitmap = Bitmap.createBitmap(320, 480, Bitmap.Config.ARGB_8888);
+		mCanvas = new Canvas(mBitmap);
+
+		Bitmap mBitmapSave = null;
+		
+		File imgFile = new File("/data/data/com.example.anti_spy/files/sample.png");
+
+	      try {
+//	    	  ToDo handle exception if file does not exit
+			  mBitmapSave = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+	      } catch (Exception e) {
+	           e.printStackTrace();
+	      }
+	      
+	      mCanvas.drawBitmap(mBitmapSave, 0, 0, null);
+		
+	      invalidate();
+	}
+
+	
+	
 	class Point {
 		float x, y;
 
