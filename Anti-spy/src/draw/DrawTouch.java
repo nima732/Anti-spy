@@ -9,6 +9,8 @@ import com.example.anti_spy.R;
 import com.example.anti_spy.R.layout;
 import com.example.anti_spy.R.menu;
 
+import extLibrary.PhotoViewAttacher;
+
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
@@ -20,6 +22,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.View;
@@ -31,6 +34,8 @@ import android.widget.Toast;
 
 public class DrawTouch extends Activity {
 	DrawCircle drawView;
+	ImageView myImageView;
+	PhotoViewAttacher mAttacher;
 
 	/*
 	 * @Override public void onCreate(Bundle savedInstanceState) {
@@ -77,8 +82,9 @@ public class DrawTouch extends Activity {
 
 				System.out.println(success + "folder");
 
-//				File file = new File(Environment.getExternalStorageDirectory()
-//						.toString() + "/sample.png");
+				// File file = new
+				// File(Environment.getExternalStorageDirectory()
+				// .toString() + "/sample.png");
 
 				File file = new File(folder, "/sample.png");
 
@@ -198,7 +204,6 @@ public class DrawTouch extends Activity {
 					}
 				}
 
-
 				FileOutputStream ostream = null;
 				// FileOutputStream outputStream = null;
 				try {
@@ -266,58 +271,69 @@ public class DrawTouch extends Activity {
 			}
 
 		});
-		
+
 		button3.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
-				
-/*				File imgFile = new File("/data/data/com.example.anti_spy/files/sample.png");
-				if(imgFile.exists()){
 
-				    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+				/*
+				 * File imgFile = new
+				 * File("/data/data/com.example.anti_spy/files/sample.png");
+				 * if(imgFile.exists()){
+				 * 
+				 * Bitmap myBitmap =
+				 * BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+				 * 
+				 * ImageView myImage = (ImageView)
+				 * findViewById(R.id.imageView1);
+				 * myImage.setImageBitmap(myBitmap);
+				 * 
+				 * }
+				 */
 
-				    ImageView myImage = (ImageView) findViewById(R.id.imageView1);
-				    myImage.setImageBitmap(myBitmap);
-
-				}
-*/				
-				
-				
-				
 				drawView.handleLoadImage();
-				
-				
-//				DrawCircle drawCircle = new DrawCircle(Context context, AttributeSet attSet);
-//				drawCircle.handleLoadImage();
 
-//				Bitmap mBitmap ;
-//				Canvas mCanvas;
-//				Paint paint = new Paint();
-//
-//				mBitmap = Bitmap.createBitmap(320, 480, Bitmap.Config.ARGB_8888);
-//				mCanvas = new Canvas(mBitmap);
-//				
-//				Bitmap mBitmapSave = null;
-//				
-//				File imgFile = new File("/data/data/com.example.anti_spy/files/sample.png");
-//
-//			      try {
-//					  mBitmapSave = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-//
-//			    	  
-////			    	  mBitmapSave.compress(Bitmap.CompressFormat.PNG, 100, new FileOutputStream(imgFile));
-//			      } catch (Exception e) {
-//			           e.printStackTrace();
-//			      }
-//			      
-//			      mCanvas.drawBitmap(mBitmapSave, 0, 0, null);
+				// DrawCircle drawCircle = new DrawCircle(Context context,
+				// AttributeSet attSet);
+				// drawCircle.handleLoadImage();
 
-			      
+				// Bitmap mBitmap ;
+				// Canvas mCanvas;
+				// Paint paint = new Paint();
+				//
+				// mBitmap = Bitmap.createBitmap(320, 480,
+				// Bitmap.Config.ARGB_8888);
+				// mCanvas = new Canvas(mBitmap);
+				//
+				// Bitmap mBitmapSave = null;
+				//
+				// File imgFile = new
+				// File("/data/data/com.example.anti_spy/files/sample.png");
+				//
+				// try {
+				// mBitmapSave =
+				// BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+				//
+				//
+				// // mBitmapSave.compress(Bitmap.CompressFormat.PNG, 100, new
+				// FileOutputStream(imgFile));
+				// } catch (Exception e) {
+				// e.printStackTrace();
+				// }
+				//
+				// mCanvas.drawBitmap(mBitmapSave, 0, 0, null);
+
 			}
 		});
-		
 
+		myImageView = (ImageView) findViewById(R.id.imageView1);
+
+		Drawable bitmap = getResources().getDrawable(R.drawable.background_image);
+		myImageView.setImageDrawable(bitmap);
+
+		
+		mAttacher = new PhotoViewAttacher(myImageView);
 	}
 
 	@Override
