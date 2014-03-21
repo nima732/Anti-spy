@@ -327,13 +327,13 @@ public class DrawTouch extends Activity {
 			}
 		});
 
-		myImageView = (ImageView) findViewById(R.id.imageView1);
-
-		Drawable bitmap = getResources().getDrawable(R.drawable.background_image);
-		myImageView.setImageDrawable(bitmap);
-
-		
-		mAttacher = new PhotoViewAttacher(myImageView);
+//		myImageView = (ImageView) findViewById(R.id.imageView1);
+//
+//		Drawable bitmap = getResources().getDrawable(R.drawable.background_image);
+//		myImageView.setImageDrawable(bitmap);
+//
+//		
+//		mAttacher = new PhotoViewAttacher(myImageView);
 	}
 
 	@Override

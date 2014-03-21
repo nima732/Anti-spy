@@ -48,6 +48,7 @@ public class DrawCircle extends View implements OnTouchListener {
 		paint.setStrokeWidth(8);
 		paint.setColor(Color.BLACK);
 
+		
 	}
 
 	@Override
@@ -152,6 +153,8 @@ public class DrawCircle extends View implements OnTouchListener {
 	      
 	      mCanvas.drawBitmap(mBitmapSave, 0, 0, null);
 		
+//	      setBackground
+	      
 	      invalidate();
 	}
 
