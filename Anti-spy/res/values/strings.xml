@@ -17,5 +17,7 @@
     <string name="butten_layout_tutorial">Hello Butten</string>
     <string name="Lets_draw_something">Lets draw something</string>
     <string name="title_activity_draw_touch">DrawTouch</string>
+    <string name="title_activity_deme_view">DemeViewActivity</string>
+    <string name="title_activity_fragment">FragmentActivity</string>
 
 </resources>

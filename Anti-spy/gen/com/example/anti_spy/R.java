@@ -39,46 +39,58 @@ public final class R {
         public static final int img=0x7f020007;
     }
     public static final class id {
-        public static final int Button1=0x7f090011;
-        public static final int Button2=0x7f090012;
-        public static final int Button3=0x7f090013;
-        public static final int Button4=0x7f090014;
-        public static final int RelativeLayout1=0x7f090010;
-        public static final int action_settings=0x7f090015;
-        public static final int add=0x7f09000e;
-        public static final int button=0x7f09000b;
-        public static final int buttonLoad=0x7f090008;
-        public static final int buttonTouch=0x7f090007;
-        public static final int buttonTouch2=0x7f090009;
-        public static final int checkBox1=0x7f090003;
-        public static final int draw=0x7f090005;
-        public static final int group=0x7f09000c;
-        public static final int imageView1=0x7f090006;
-        public static final int label=0x7f090001;
-        public static final int logo=0x7f090002;
-        public static final int mylist=0x7f09000f;
-        public static final int relativeLayout1=0x7f090004;
-        public static final int relativeLayout2=0x7f090000;
-        public static final int text=0x7f09000a;
-        public static final int textView1=0x7f09000d;
+        public static final int Button1=0x7f090015;
+        public static final int Button2=0x7f090016;
+        public static final int Button3=0x7f090017;
+        public static final int Button4=0x7f090018;
+        public static final int RelativeLayout1=0x7f090014;
+        public static final int action_settings=0x7f09001a;
+        public static final int add=0x7f090012;
+        public static final int article_fragment=0x7f090019;
+        public static final int button=0x7f09000e;
+        public static final int buttonLoad=0x7f09000b;
+        public static final int buttonTouch=0x7f09000a;
+        public static final int buttonTouch2=0x7f09000c;
+        public static final int checkBox1=0x7f090006;
+        public static final int drag=0x7f090001;
+        public static final int draw=0x7f090008;
+        public static final int draw2=0x7f090000;
+        public static final int group=0x7f090010;
+        public static final int imageView1=0x7f090009;
+        public static final int label=0x7f090004;
+        public static final int logo=0x7f090005;
+        public static final int mylist=0x7f090013;
+        public static final int other=0x7f09000d;
+        public static final int paint=0x7f090002;
+        public static final int relativeLayout1=0x7f090007;
+        public static final int relativeLayout2=0x7f090003;
+        public static final int text=0x7f09000f;
+        public static final int textView1=0x7f090011;
     }
     public static final class layout {
-        public static final int activity_display_message=0x7f030000;
-        public static final int activity_display_resource_test=0x7f030001;
-        public static final int activity_draw_touch=0x7f030002;
-        public static final int activity_layout_tutorial=0x7f030003;
-        public static final int activity_list_resources=0x7f030004;
-        public static final int activity_list_running_app=0x7f030005;
-        public static final int activity_main=0x7f030006;
+        public static final int activity_demo_view=0x7f030000;
+        public static final int activity_display_message=0x7f030001;
+        public static final int activity_display_resource_test=0x7f030002;
+        public static final int activity_draw_touch=0x7f030003;
+        public static final int activity_fragment=0x7f030004;
+        public static final int activity_layout_tutorial=0x7f030005;
+        public static final int activity_list_resources=0x7f030006;
+        public static final int activity_list_running_app=0x7f030007;
+        public static final int activity_main=0x7f030008;
+        public static final int canvas_board=0x7f030009;
+        public static final int fragment_layout=0x7f03000a;
+        public static final int just_button=0x7f03000b;
+        public static final int other_layout=0x7f03000c;
     }
     public static final class menu {
-        public static final int display_message=0x7f080000;
-        public static final int display_resource_test=0x7f080001;
-        public static final int draw_touch=0x7f080002;
-        public static final int layout_tutorial=0x7f080003;
-        public static final int list_resources=0x7f080004;
-        public static final int list_running_app=0x7f080005;
-        public static final int main=0x7f080006;
+        public static final int deme_view=0x7f080000;
+        public static final int display_message=0x7f080001;
+        public static final int display_resource_test=0x7f080002;
+        public static final int draw_touch=0x7f080003;
+        public static final int layout_tutorial=0x7f080004;
+        public static final int list_resources=0x7f080005;
+        public static final int list_running_app=0x7f080006;
+        public static final int main=0x7f080007;
     }
     public static final class string {
         public static final int Lets_draw_something=0x7f06000e;
@@ -91,9 +103,11 @@ public final class R {
         public static final int edit_message=0x7f060005;
         public static final int hello=0x7f060004;
         public static final int hello_world=0x7f060002;
+        public static final int title_activity_deme_view=0x7f060010;
         public static final int title_activity_display_message=0x7f060008;
         public static final int title_activity_display_resource_test=0x7f06000b;
         public static final int title_activity_draw_touch=0x7f06000f;
+        public static final int title_activity_fragment=0x7f060011;
         public static final int title_activity_layout_tutorial=0x7f06000c;
         public static final int title_activity_list_resources=0x7f06000a;
         public static final int title_activity_list_running_app=0x7f060009;

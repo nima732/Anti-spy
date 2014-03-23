@@ -8,6 +8,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".DrawTouch" >
     
+    <!-- this class should be before Button otherwise listener on button DOSE not work -->
 <draw.DrawCircle 
     android:id ="@+id/draw"
     android:layout_width="fill_parent"

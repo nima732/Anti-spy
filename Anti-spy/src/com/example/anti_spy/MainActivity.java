@@ -1,6 +1,7 @@
 package com.example.anti_spy;
 
-//import draw.DrawCircle;
+import draw.DrawCircle;
+import newway.DemoView;
 import draw.DrawTouch;
 import android.os.Bundle;
 import android.app.Activity;
@@ -13,8 +14,10 @@ import android.widget.EditText;
 public class MainActivity extends Activity {
 	public final static String EXTRA_MESSAGE="come.example.anti_spy.MESSAGE";
 	
-//	DrawCircle drawCircle;
+	DrawCircle drawCircle;
 	DrawTouch drawTouch;
+	DemeViewActivity demeViewActivity;
+	DemoView demoView;
 	
 		@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,9 +70,16 @@ public class MainActivity extends Activity {
 //		drawCircle = new DrawCircle(this);
 //		setContentView(drawCircle);
 // ======================================		
-		drawTouch = new DrawTouch();
-		Intent drawLineIntent = new Intent(this,DrawTouch.class);
+//		drawTouch = new DrawTouch();
+//		Intent drawLineIntent = new Intent(this,DrawTouch.class);
+//		startActivity(drawLineIntent);
+//		====================**==================
+		demeViewActivity = new DemeViewActivity();
+		Intent drawLineIntent = new Intent(this,DemeViewActivity.class);
 		startActivity(drawLineIntent);
+//		=========================================
+//		Intent fragIntent = new Intent(this,FragmentActivity.class);
+//		startActivity(fragIntent);
 	}
 
 }

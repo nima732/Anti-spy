@@ -98,6 +98,14 @@
             android:name="draw.DrawTouch"
             android:label="@string/title_activity_draw_touch" >
         </activity>
+        <activity
+            android:name="com.example.anti_spy.DemeViewActivity"
+            android:label="@string/title_activity_deme_view" >
+        </activity>
+        <activity
+            android:name="com.example.anti_spy.FragmentActivity"
+            android:label="@string/title_activity_fragment" >
+        </activity>
     </application>
 
 </manifest>
