@@ -82,6 +82,11 @@ public class DemoView extends View {
 
     }
     
+    /* 
+     * This method is necessary for setting background image and without that is not 
+     * working
+     * @see android.view.View#onDraw(android.graphics.Canvas)
+     */
     @Override
     public void onDraw(Canvas canvas) {
     	canvas.drawColor(0xFFAAAAAA);
